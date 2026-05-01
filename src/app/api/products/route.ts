@@ -1,15 +1,27 @@
 import { NextResponse } from 'next/server'
-import { connectDB } from '@/lib/mongodb'
-import Product from '@/lib/models/Product'
+import mongoose, { Schema } from 'mongoose'
 
-// GET /api/products — All products fetch
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/marketplace'
+
+async function connectDB() {
+  if (mongoose.connection.readyState >= 1) return
+  await mongoose.connect(MONGODB_URI)
+}
+
+const ProductSchema = new Schema({
+  name:  { type: String, required: true },
+  price: { type: Number, required: true },
+  approved: { type: Boolean, default: false },
+}, { timestamps: true })
+
+const Product = mongoose.models.Product || mongoose.model('Product', ProductSchema)
+
 export async function GET() {
   await connectDB()
   const products = await Product.find({ approved: true })
   return NextResponse.json(products)
 }
 
-// POST /api/products — New product add
 export async function POST(req: Request) {
   await connectDB()
   const body = await req.json()

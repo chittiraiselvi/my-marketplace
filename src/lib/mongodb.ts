@@ -1,20 +1,11 @@
 import mongoose from 'mongoose'
 
-const MONGODB_URI = process.env.MONGODB_URI!
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/marketplace'
 
-let cached = (global as any).mongoose
-
-if (!cached) {
-  cached = (global as any).mongoose = { conn: null, promise: null }
-}
+let cached = (global as any).mongoose || { conn: null }
 
 export async function connectDB() {
   if (cached.conn) return cached.conn
-
-  if (!cached.promise) {
-    cached.promise = mongoose.connect(MONGODB_URI)
-  }
-
-  cached.conn = await cached.promise
+  cached.conn = await mongoose.connect(MONGODB_URI)
   return cached.conn
 }

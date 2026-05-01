@@ -1,22 +1,24 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
 
-export const useCart = create(
-  persist(
-    (set, get) => ({
-      items: [],
-      
-      addItem: (product) => set(state => ({
-        items: [...state.items, product]
-      })),
-      
-      removeItem: (id) => set(state => ({
-        items: state.items.filter(i => i.id !== id)
-      })),
-      
-      getTotal: () =>
-        get().items.reduce((sum, i) => sum + i.price, 0)
-    }),
-    { name: 'cart-storage' } // localStorage save
-  )
-)
+interface CartItem {
+  _id: string
+  name: string
+  price: number
+  image: string
+}
+
+interface CartStore {
+  items: CartItem[]
+  addItem: (item: CartItem) => void
+  removeItem: (id: string) => void
+  total: () => number
+  clear: () => void
+}
+
+export const useCart = create<CartStore>((set, get) => ({
+  items: [],
+  addItem: (item) => set((s) => ({ items: [...s.items, item] })),
+  removeItem: (id) => set((s) => ({ items: s.items.filter((i) => i._id !== id) })),
+  total: () => get().items.reduce((sum, i) => sum + i.price, 0),
+  clear: () => set({ items: [] }),
+}))

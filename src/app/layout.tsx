@@ -1,13 +1,14 @@
 import './globals.css'
-import Navbar from '../../components/layout/Navbar'
+import Navbar from '../components/layout/Navbar'
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export const metadata = {
+  title: 'MyMarket',
+  description: 'Multi-vendor marketplace',
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ta">
+    <html lang="en">
       <body>
         <Navbar />
         {children}
