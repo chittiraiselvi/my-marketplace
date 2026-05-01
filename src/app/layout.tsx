@@ -1,5 +1,5 @@
 import './globals.css'
-import Navbar from '../components/layout/Navbar'
+import Navbar from '../../components/layout/Navbar'
 
 export default function RootLayout({
   children,
@@ -7,7 +7,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html>
+    <html lang="ta">
       <body>
         <Navbar />
         {children}
