@@ -1,15 +1,16 @@
-// src/app/layout.tsx
 import './globals.css'
-import Navbar from '..Navbar/components/layout/Navbar'
+import Navbar from '../components/layout/Navbar'
 
 export default function RootLayout({
-  children
-}: { children: React.ReactNode }) {
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="ta">
+    <html>
       <body>
         <Navbar />
-        <main>{children}</main>
+        {children}
       </body>
     </html>
   )
