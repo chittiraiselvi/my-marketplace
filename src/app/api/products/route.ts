@@ -18,7 +18,7 @@ const Product = mongoose.models.Product || mongoose.model('Product', ProductSche
 
 export async function GET() {
   await connectDB()
-  const products = await Product.find({ approved: true })
+  const products = await Product.find()
   return NextResponse.json(products)
 }
 

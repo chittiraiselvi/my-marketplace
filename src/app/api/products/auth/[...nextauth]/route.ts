@@ -9,11 +9,11 @@ const handler = NextAuth({
     })
   ],
   callbacks: {
-    session({ session, token }) {
-      session.user.role = token.role // role add
-      return session
-    }
+  session({ session, token }) {
+    (session.user as any).role = token.role
+    return session
   }
+}
 })
 
 export { handler as GET, handler as POST }
