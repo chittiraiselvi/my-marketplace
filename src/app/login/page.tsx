@@ -61,8 +61,8 @@ export default function LoginPage() {
           </div>
           {msg && (
             <div style={{padding:'12px 16px',borderRadius:'10px',fontSize:'13px',
-              background:msg.includes('success')?'#d1fae5':'#fee2e2',
-              color:msg.includes('success')?'#065f46':'#991b1b'}}>
+              background:msg.includes('success')||msg.includes('successfully')?'#d1fae5':'#fee2e2',
+              color:msg.includes('success')||msg.includes('successfully')?'#065f46':'#991b1b'}}>
               {msg}
             </div>
           )}
