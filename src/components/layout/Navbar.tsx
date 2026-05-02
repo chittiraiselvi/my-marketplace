@@ -8,6 +8,7 @@ export default function Navbar() {
         <a href="/product" style={{color:'#475569',textDecoration:'none',fontWeight:'500',fontSize:'15px'}}>Products</a>
         <a href="/vendor" style={{color:'#475569',textDecoration:'none',fontWeight:'500',fontSize:'15px'}}>Sell</a>
         <a href="/cart" style={{background:'#1d5bff',color:'white',padding:'8px 20px',borderRadius:'20px',textDecoration:'none',fontWeight:'600',fontSize:'14px'}}>
+          <a href="/login" style={{color:'#475569',textDecoration:'none',fontWeight:'500',fontSize:'15px'}}>Login</a>
           🛒 Cart
         </a>
       </div>
