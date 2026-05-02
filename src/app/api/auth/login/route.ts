@@ -20,7 +20,7 @@ export async function POST(req: Request) {
     const User = mongoose.default.models.User || 
       mongoose.default.model('User', UserSchema)
 
-    const user = await User.findOne({ email: email })
+    const user = await User.findOne({ email } as any)
     if (!user)
       return NextResponse.json({ error: 'Email not found' }, { status: 400 })
 

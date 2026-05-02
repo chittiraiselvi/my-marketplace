@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     const User = mongoose.default.models.User || 
       mongoose.default.model('User', UserSchema)
 
-    const exists = await User.findOne({ email: email })
+   const exists = await User.findOne({ email: email } as any)
     if (exists)
       return NextResponse.json({ error: 'Email already registered' }, { status: 400 })
 
