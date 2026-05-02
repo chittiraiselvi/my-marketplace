@@ -9,21 +9,20 @@ export async function POST(req: Request) {
     const mongoose = await import('mongoose')
     const bcrypt = await import('bcryptjs')
 
-    const MONGODB_URI = process.env.MONGODB_URI!
     if (mongoose.default.connection.readyState < 1) {
-      await mongoose.default.connect(MONGODB_URI)
+      await mongoose.default.connect(process.env.MONGODB_URI!)
     }
 
     const UserSchema = new mongoose.default.Schema({
       name: String,
-      email: { type: String, unique: true },
+      email: String,
       password: String,
-      role: { type: String, default: 'buyer' },
+      role: String,
     })
     const User = mongoose.default.models.User || 
       mongoose.default.model('User', UserSchema)
 
-    const exists = await User.findOne({ email })
+    const exists = await User.findOne({ email: email })
     if (exists)
       return NextResponse.json({ error: 'Email already registered' }, { status: 400 })
 

@@ -7,25 +7,24 @@ export async function POST(req: Request) {
     const mongoose = await import('mongoose')
     const bcrypt = await import('bcryptjs')
     
-    const MONGODB_URI = process.env.MONGODB_URI!
     if (mongoose.default.connection.readyState < 1) {
-      await mongoose.default.connect(MONGODB_URI)
+      await mongoose.default.connect(process.env.MONGODB_URI!)
     }
 
     const UserSchema = new mongoose.default.Schema({
       name: String,
-      email: { type: String, unique: true },
+      email: String,
       password: String,
-      role: { type: String, default: 'buyer' },
+      role: String,
     })
     const User = mongoose.default.models.User || 
       mongoose.default.model('User', UserSchema)
 
-    const user = await User.findOne({ email })
+    const user = await User.findOne({ email: email })
     if (!user)
       return NextResponse.json({ error: 'Email not found' }, { status: 400 })
 
-    const match = await bcrypt.default.compare(password, user.password)
+    const match = await bcrypt.default.compare(password, user.password as string)
     if (!match)
       return NextResponse.json({ error: 'Wrong password' }, { status: 400 })
 
