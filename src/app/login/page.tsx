@@ -18,6 +18,13 @@ export default function LoginPage() {
     const data = await res.json()
     setMsg(data.message || data.error)
     setLoading(false)
+    // Redirect after success
+  if (data.message?.includes('successful') || data.message?.includes('successfully')) {
+    setTimeout(() => {
+      window.location.href = '/'
+    }, 1000)
+  }
+
   }
 
   return (
