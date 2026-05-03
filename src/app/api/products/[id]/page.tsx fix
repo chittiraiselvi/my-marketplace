@@ -1,0 +1,20 @@
+export default async function ProductDetail({ params }: any) {
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/products`)
+  const products = await res.json()
+
+  const product = products.find((p: any) => p._id === params.id)
+
+  if (!product) return <div>Product not found</div>
+
+  return (
+    <div>
+      <h1>{product.name}</h1>
+      <p>₹{product.price}</p>
+    </div>
+  )
+}// src/app/products/[id]/page.tsx  (Dynamic Route)
+export default function ProductPage({ params }) 
+
+  // params.id = product ID from URL
+  // /products/123 → params.id = "123"
+  return <div>Product Detail: {params.id}</div>
