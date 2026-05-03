@@ -203,7 +203,7 @@ export default function CartPage() {
             </div>
           </div>
 
-          <button onClick={() => setOrdered(true)}
+          <button onClick={() => window.location.href = '/checkout'}
             style={{width:'100%',padding:'16px',background:'linear-gradient(135deg,#1d5bff,#6c3fff)',color:'white',border:'none',borderRadius:'14px',fontSize:'16px',fontWeight:'700',cursor:'pointer',marginBottom:'12px'}}>
             Place Order Rs.{total} →
           </button>
