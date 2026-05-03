@@ -17,11 +17,21 @@ export default function LoginPage() {
     })
     const data = await res.json()
     setMsg(data.message || data.error)
-    setLoading(false)
-    // Redirect after success
-  if (data.message?.includes('successful') || data.message?.includes('successfully')) {
+  setLoading(false)
+
+  if (data.message?.includes('successfully')) {
+    // Register success → Login tab-க்கு switch
     setTimeout(() => {
-      window.location.href = '/'
+      setIsLogin(true)
+      setMsg('Account created! Now login.')
+      setForm({ name: '', email: form.email, password: '' })
+    }, 1000)
+  }
+
+  if (data.message?.includes('successful!')) {
+    // Login success → Products page
+    setTimeout(() => {
+      window.location.href = '/product'
     }, 1000)
   }
 
