@@ -11,6 +11,7 @@
     "mongoose": "^9.6.1",
     "next": "latest",
     "next-auth": "^4.24.14",
+    "razorpay": "^2.9.6",
     "react": "latest",
     "react-dom": "latest",
     "uuid": "^14.0.0",
